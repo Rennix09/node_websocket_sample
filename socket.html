@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script>
+    // 执行 io() 并传入需要连接到的websocket地址
+    let sock = io('ws://localhost:8080');
+
+    // 绑定监听 当服务器发送消息到 receive 的时候 ，触发这个函数
+    sock.on('receive', msg => {
+        console.log(msg);
+    });
+    // 每隔三秒钟向服务器发送一次消息
+    setInterval(() => {
+        sock.emit('send', new Date());
+    }, 3000);
+</script>
